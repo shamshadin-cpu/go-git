@@ -128,9 +128,13 @@ func isPrefix(payload []byte) bool {
 // advertised ref.
 func decodeFirstHash(p *advRefsDecoder) decoderStateFn {
 	// If the repository is empty, we receive a flush here (HTTP).
-	if isFlush(p.line) {
+	if isEmpty(p.line) {
 		p.err = ErrEmptyAdvRefs
-		return nil
+
+		// From Git 2.41, even empty repository should lead
+		// to a decode Caps, so that the object-format cap
+		// can be identified.
+		return decodeCaps
 	}
 
 	if len(p.line) < hashSize {

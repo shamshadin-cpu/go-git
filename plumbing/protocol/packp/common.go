@@ -2,6 +2,9 @@ package packp
 
 import (
 	"fmt"
+
+	"github.com/go-git/go-git/v5/plumbing"
+	"github.com/go-git/go-git/v5/plumbing/hash"
 )
 
 type stateFn func() stateFn
@@ -46,6 +49,19 @@ var (
 
 func isFlush(payload []byte) bool {
 	return len(payload) == 0
+}
+
+func isEmpty(payload []byte) bool {
+	if isFlush(payload) {
+		return true
+	}
+
+	if len(payload) > hash.HexSize &&
+		string(payload[:hash.HexSize]) == plumbing.ZeroHash.String() {
+		return true
+	}
+
+	return false
 }
 
 // ErrUnexpectedData represents an unexpected data decoding a message

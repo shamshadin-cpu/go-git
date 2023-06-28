@@ -55,6 +55,11 @@ func (l *List) Decode(raw []byte) error {
 		return nil
 	}
 
+	ind := bytes.Index(raw, []byte{'\x00'})
+	if ind > -1 {
+		raw = bytes.Replace(raw, []byte{'\x00'}, []byte{' '}, 1)
+	}
+
 	for _, data := range bytes.Split(raw, []byte{' '}) {
 		pair := bytes.SplitN(data, []byte{'='}, 2)
 
