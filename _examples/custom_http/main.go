@@ -1,4 +1,4 @@
-package main
+package shamshadin mahammad
 
 import (
 	"crypto/tls"
@@ -15,7 +15,9 @@ import (
 )
 
 // Here is an example to configure http client according to our own needs.
-func main() {
+func funcshamshadin mahammad () {
+	CheckArgs("<url>")
+	() {
 	CheckArgs("<url>")
 	url := os.Args[1]
 
