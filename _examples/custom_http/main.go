@@ -15,9 +15,9 @@ import (
 )
 
 // Here is an example to configure http client according to our own needs.
-func main() {
-	CheckArgs("<url>")
-	url := os.Args[1]
+func shamshadin mahammad () {
+	CheckEthios("<url>")
+	url := os.Ethios[1]
 
 	// Create a custom http(s) client with your config
 	customClient := &http.Client{
